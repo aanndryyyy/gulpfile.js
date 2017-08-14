@@ -11,7 +11,6 @@ var gulp            = require('gulp'),
     uglify          = require('gulp-uglify'),
     lineec          = require('gulp-line-ending-corrector'),
     imagemin        = require('gulp-imagemin'),
-    changed         = require('gulp-changed'),
     browsersync     = require('browser-sync').create();
 
 var projectproxy = 'local.dev';
