@@ -1,6 +1,6 @@
 var gulp            = require('gulp'),
     sass            = require('gulp-sass'),
-    notify          = require("gulp-notify"),
+    notify          = require('gulp-notify'),
     autoprefixer    = require('gulp-autoprefixer'),
     sourcemaps      = require('gulp-sourcemaps'),
     cleanCSS        = require('gulp-clean-css'),
@@ -36,7 +36,7 @@ gulp.task('sass', ['sass:clean'], function () {
     .pipe(lineec())
     .pipe(gulp.dest('./dist/css'))
     .pipe(browsersync.reload({ stream:true }))
-    .pipe(notify({title: "Gulp Task", message: "Completed!", timeout: 2, onLast: true}));
+    .pipe(notify({title: 'SASS Task', message: 'SASS compiled!', timeout: 2, onLast: true}));
 });
 
 gulp.task('sass:clean', function() {
@@ -46,7 +46,7 @@ gulp.task('sass:clean', function() {
 });
 
 gulp.task('images', ['images:clean'], function() {
-  gulp.src('./src/img/**/*')
+  return gulp.src('./src/img/**/*')
     .pipe(imagemin({
       progressive: true,
       optimizationLevel: 5, // 0-7 low-high
@@ -54,12 +54,18 @@ gulp.task('images', ['images:clean'], function() {
       svgoPlugins: [{removeViewBox: false}]
     }))
     .pipe(gulp.dest('./dist/img'))
+    .pipe(notify({title: 'Images Task', message: 'Images compressed!', timeout: 2, onLast: true}));
 });
 
 gulp.task('images:clean', function() {
   return clean([
     './dist/img/**/*'
   ]);
+});
+
+gulp.task('images:watch', ['images'], function(done) {
+  browsersync.reload();
+  done();
 });
 
 gulp.task('php', ['php:clean'], function() {
@@ -74,7 +80,8 @@ gulp.task('php', ['php:clean'], function() {
     .pipe(gulpif('*.css', cleanCSS({
       level: 2
     })))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
+    .pipe(notify({title: 'PHP Task', message: 'PHP compiled!', timeout: 2, onLast: true}));
 });
 
 gulp.task('php:clean', function() {
@@ -84,18 +91,23 @@ gulp.task('php:clean', function() {
   ]);
 });
 
+gulp.task('php:watch', ['php'], function(done) {
+  browsersync.reload();
+  done();
+});
+
 gulp.task('browsersync', ['sass', 'php', 'images'], function() {
   browsersync.init({
-      proxy: projectproxy,
-      notify: false,
-      open: false
-    });
+    proxy: projectproxy,
+    notify: false,
+    open: false
+  });
 });
 
 gulp.task('watch', ['browsersync'], function() {
   gulp.watch('./src/scss/**/*.scss', ['sass']);
-  gulp.watch(['./*.php', './inc/**/*.php', './views/**/*.php', './src/js/**/*.js'], ['php']);
-  gulp.watch('./src/img/**/*', ['images']);
+  gulp.watch(['./*.php', './inc/**/*.php', './views/**/*.php', './src/js/**/*.js'], ['php:watch']);
+  gulp.watch('./src/img/**/*', ['images:watch']);
 }); 
 
 gulp.task('default', ['browsersync', 'sass', 'php', 'images', 'watch']);
