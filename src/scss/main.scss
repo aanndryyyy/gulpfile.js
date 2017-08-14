@@ -2,3 +2,24 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+@media (max-width: 600px) {
+  body {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+@media (max-width: 1200px) {
+  body {
+    color: #fff;
+    background-color: #000;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    color: #fff;
+    background-color: #000;
+  }
+}
