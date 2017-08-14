@@ -1,0 +1,29 @@
+{
+  "name": "me.andry.gulp",
+  "version": "1.0.0",
+  "description": "My gulpfile.js for rapid development.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aanndryyyy/gulpfile.js.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulpfile",
+    "npm",
+    "node",
+    "development"
+  ],
+  "author": "Andry Pedak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aanndryyyy/gulpfile.js/issues"
+  },
+  "homepage": "https://github.com/aanndryyyy/gulpfile.js#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
