@@ -40,7 +40,7 @@ gulp.task('sass', ['sass:clean'], function () {
 
 gulp.task('sass:clean', function() {
   return clean([
-    './dist/css/**/*.scss'
+    './dist/css/**/*.css'
   ]);
 });
 
